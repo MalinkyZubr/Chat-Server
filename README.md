@@ -1,0 +1,2 @@
+# Whats This?
+The chat server is a personal project of mine ive been slowly adding to as an aggregate of the new things I learn in python on the side of other major projects and school. In its current state it is totally unfinished and very buggy. I will continue working on it. The GUI is currently isolated from the client file, as it is completely dysfuncitonal at the moment. Maybe I should have finished that TKinter course before trying to make it! 
