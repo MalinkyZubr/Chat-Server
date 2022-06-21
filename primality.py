@@ -54,7 +54,7 @@ def primality(number):
 @jit(nopython=True)
 def get_primes():
     prime_list = []
-    for num in numba.prange(100000):
+    for num in numba.prange(1000):
         prime = primality(num)
         if prime:
             prime_list.append(prime)
@@ -75,6 +75,9 @@ def get_prime_pair(prime_list):
 if __name__ == "__main__":
     start_time = time.time()
     x = get_primes()
+    with open(r"primes.json", "w") as primes:
+        primes.write(x)
+
     #print(z[0] * z[1])
     end_time = time.time()
     print(end_time-start_time)
