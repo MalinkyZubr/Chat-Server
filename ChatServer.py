@@ -16,12 +16,11 @@ import dask
 import numba
 from numba import jit
 from numpy import int64
-import system_logger
+import logging
 import primality
+import phi_finder
 
-# ALSO, ADD SOME ENCRYPTION
 pwd = os.path.dirname(os.path.abspath(__file__))
-
 
 class SocketOpts:
     def ip_identifier(self, connection):
@@ -52,23 +51,6 @@ class SocketOpts:
         connections.remove(connection)
         connection[1].join()
         return f"[+]{ip} disconnected"
-
-
-class PhiFinder:
-    def gcd(self, p, q):
-        while q != 0:
-            p, q = q, p % q
-        return p
-
-    def is_coprime(self, x, y):
-        return self.gcd(x, y) == 1
-
-    def phi(self, x):
-        if x == 1:
-            return 1
-        else:
-            n = [y for y in range(1, x) if self.is_coprime(x, y)]
-            return len(n)
 
 
 class AESCipher(object):
@@ -108,21 +90,21 @@ class AESCipher(object):
 class SocketSecurity:  # see khan academy to figure out how this RSA thing works, I dont remember
     def __init__(self):
         primes_file = os.path.join(pwd, r'primes.json')
-        phi_finder = PhiFinder()
         self.socket_opts = SocketOpts()
         self.aes_cipher = AESCipher()
         self.p1, self.p2 = primality.get_prime_pair(primes_file)
         self.public_1 = (int(self.p1) * int(self.p2))
-        self.phi_of_key = phi_finder.phi(self.public_1)
+        self.phi_of_key = phi_finder.phi(self.public_1) #MAJOR SLOWDOWN HERE
+        print("7")
         self.public_2 = self.eligible_public_2(self.phi_of_key)
+        print("8")
         self.private_key = (2 * self.phi_of_key + 1) / self.public_2
+        print("9")
         self.public_key = (self.public_1, self.public_2)  # send this
-        with open(r"server_certificate.pem", r) as cert:
-            self.certificate = cert
+        print("10")
 
-    @staticmethod
-    @jit(nopython=True, parallel=True, nogil=True)
-    def get_factors(number):
+    def get_factors(self, number):
+        print("uh oh")
         factors = []
         for i in numba.prange(1, number + 1):
             if number % i == 0:
@@ -136,14 +118,14 @@ class SocketSecurity:  # see khan academy to figure out how this RSA thing works
         else:
             return True
 
-    def list_similarity_checker(list1, list2):
+    def list_similarity_checker(self, list1, list2):
         for number in list1:
             if number in list2:
                 return True
             else:
                 return False
 
-    def eligible_public_2(phi):
+    def eligible_public_2(self, phi):
         possible_public_2s = [
             number for number in numba.prange(85, 115)
             if is_odd(number) and not
@@ -315,6 +297,7 @@ class Server:
         message_file_handler.setFormatter(message_log_format)
         self.message_logger.addHandler(message_file_handler)
 
+        print("INTIALIZED")
     def ping(self):
         self.system_logger.info("[+]Pinging All Connections")
         while True:
@@ -471,6 +454,5 @@ class Server:
 
 
 if __name__ == "__main__":
-    self.system_logger.info(socket.gethostname())
     server = Server("0.0.0.0", 2222)
     server.main()
