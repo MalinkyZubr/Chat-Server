@@ -19,6 +19,7 @@ from numpy import int64
 import system_logger
 
 # ALSO, ADD SOME ENCRYPTION
+pwd = os.path.dirname(os.path.abspath(__file__))
 
 
 class SocketOpts:
@@ -232,6 +233,7 @@ class SERVER_COMMANDS:
             "servermessage": "Send a server-wide message",
             "shutdown": "Close the server and disconnect all clients"}
         self.SOCKET_OPTS = SocketOpts()
+        self.ban_file = filename = os.path.join(pwd, r'ban_list.txt')
 
     def command_input(self, inputs):
         request = inputs.split(sep=" ")
@@ -263,7 +265,7 @@ class SERVER_COMMANDS:
                         (connection, thread), connections)
                 except (ConnectionAbortedError, ConnectionError):
                     pass
-                with open(r'ban_list.txt', 'a') as ban_list:
+                with open(self.ban_file, 'a') as ban_list:
                     ban_list.write(ip_requested)
                 return f"[!]User {ip} Was BANNED By Admin"
             else:
@@ -271,7 +273,7 @@ class SERVER_COMMANDS:
 
     def unban_user(self, ip_requested=None):
         if ip_requested:
-            with open(r"ban_list.txt", "w+") as ban_list:
+            with open(self.ban_file, "w+") as ban_list:
                 for line in ban_list.readlines():
                     if line == ip_requested:
                         ban_list.seek(0, 1)
@@ -317,6 +319,9 @@ class SERVER_COMMANDS:
 
 class Server:
     def __init__(self, IP, PORT):
+        sys_log_file = filename = os.path.join(pwd, r'system_logs.txt')
+        msg_log_file = filename = os.path.join(pwd, r'message_logs.txt')
+        
         self.IP = IP
         self.PORT = PORT
         self.connections = []
@@ -336,7 +341,7 @@ class Server:
         self.system_logger = system_logger.getLogger('System Log')
         self.system_logger.setLevel(system_logger.DEBUG)
         stream_hanlder = self.system_logger.StreamHandler()
-        file_handler = self.system_logger.FileHandler(r'system_logs.txt')
+        file_handler = self.system_logger.FileHandler(sys_log_file)
         stream_hanlder.setLevel(DEBUG)
         file_handler.setLevel(INFO)
         log_format = self.system_logger.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(messages)s")
@@ -347,7 +352,7 @@ class Server:
 
         self.message_logger = system_logger.getLogger('Message Log')
         self.message_logger.setLevel(system_logger.INFO)
-        message_file_handler = self.message_logger.FileHandler(r'message_logs')
+        message_file_handler = self.message_logger.FileHandler(msg_log_file)
         message_file_handler.setLevel(INFO)
         message_log_format = self.message_logger.Formatter("%(name)s - %(message)s")
         message_file_handler.setFormatter(message_log_format)

@@ -6,6 +6,10 @@ import time
 from multiprocessing import Pool
 from multiprocessing.pool import ThreadPool
 import random
+import os
+
+pwd = os.path.dirname(os.path.abspath(__file__))
+filename = os.path.join(pwd, r'primes.json')
 
 
 @jit(nopython=True)
@@ -24,16 +28,6 @@ def second_test(num):
     else:
         return True
 
-"""
-def third_test(num):
-    i = 5
-    stop = int(num**0.5)
-    while i <= stop:
-        if not num % i or not num % (i+2):
-            return False
-        i += 6
-    return True
-"""
 @jit(nopython=True)
 def third_test(num):
     for number in numba.prange(5, int(num ** 0.5), 6):
@@ -54,7 +48,7 @@ def primality(number):
 @jit(nopython=True)
 def get_primes():
     prime_list = []
-    for num in numba.prange(1000):
+    for num in numba.prange(10000000):
         prime = primality(num)
         if prime:
             prime_list.append(prime)
@@ -62,7 +56,6 @@ def get_primes():
         
 @jit(nopython=True)
 def get_prime_pair(prime_list):
-    print(prime_list)
     index1 = random.randint(0, len(prime_list))
     if index1 < 6:
         index2 = index1 + 6
@@ -75,16 +68,14 @@ def get_prime_pair(prime_list):
 if __name__ == "__main__":
     start_time = time.time()
     x = get_primes()
-    with open(r"primes.json", "w") as primes:
-        primes.write(x)
+    with open(filename, "w") as primes:
+        primes.write(str(x))
 
-    #print(z[0] * z[1])
     end_time = time.time()
     print(end_time-start_time)
     start_time = time.time()
     z = get_prime_pair(x)
     end_time = time.time()
-    print(z)
     print(end_time-start_time)
 
 
