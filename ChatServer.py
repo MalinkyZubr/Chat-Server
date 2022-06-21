@@ -17,6 +17,7 @@ import numba
 from numba import jit
 from numpy import int64
 import system_logger
+import primality
 
 # ALSO, ADD SOME ENCRYPTION
 pwd = os.path.dirname(os.path.abspath(__file__))
@@ -51,45 +52,6 @@ class SocketOpts:
         connections.remove(connection)
         connection[1].join()
         return f"[+]{ip} disconnected"
-
-
-class PrimalityFinder:
-    def second_test(self,num):
-        if not num % 2 or not num % 3:
-            return False
-        else:
-            return True
-
-    def third_test(self,num):
-        i = 0
-        stop = int(num**0.5)
-        while i <= stop:
-            
-            if not num % i or not num % (i+2):
-                return False
-            i += 6
-        return True
-
-    def primality(self):
-        prime_list = []
-        for num in range(100000000000000000000000000000000000000000000000,
-                        100000000000000000000000000000000000000000100000):
-            second = self.second_test(num)
-            third = self.third_test(num)
-            if second and third:
-                prime_list.append(num)
-            else:
-                continue
-        return prime_list
-
-    def get_prime_pair(self, prime_list):
-        index1 = int(random.randint(0, len(prime_list)))
-        if index1 < 6:
-            index2 = index1 + 6
-        else:
-            index2 = index1 - 3
-
-        return prime_list[index1], prime_list[index2]
 
 
 class PhiFinder:
@@ -145,12 +107,11 @@ class AESCipher(object):
 
 class SocketSecurity:  # see khan academy to figure out how this RSA thing works, I dont remember
     def __init__(self):
-        primality_finder = PrimalityFinder()
+        primes_file = os.path.join(pwd, r'primes.json')
         phi_finder = PhiFinder()
-        primes_list = primality_finder.primality()
         self.socket_opts = SocketOpts()
         self.aes_cipher = AESCipher()
-        self.p1, self.p2 = primality_finder.get_prime_pair(primes_list)
+        self.p1, self.p2 = primality.get_prime_pair(primes_file)
         self.public_1 = (int(self.p1) * int(self.p2))
         self.phi_of_key = phi_finder.phi(self.public_1)
         self.public_2 = self.eligible_public_2(self.phi_of_key)
@@ -175,8 +136,6 @@ class SocketSecurity:  # see khan academy to figure out how this RSA thing works
         else:
             return True
 
-    @staticmethod
-    @jit(nopython=True)
     def list_similarity_checker(list1, list2):
         for number in list1:
             if number in list2:
@@ -184,8 +143,6 @@ class SocketSecurity:  # see khan academy to figure out how this RSA thing works
             else:
                 return False
 
-    @staticmethod
-    @jit(nopython=True)
     def eligible_public_2(phi):
         possible_public_2s = [
             number for number in numba.prange(85, 115)

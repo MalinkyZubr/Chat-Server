@@ -1,15 +1,12 @@
-import dask
 import numba
 import cv2
 from numba import jit
 import time
-from multiprocessing import Pool
-from multiprocessing.pool import ThreadPool
 import random
 import os
 
 pwd = os.path.dirname(os.path.abspath(__file__))
-filename = os.path.join(pwd, r'primes.json')
+primes_file = os.path.join(pwd, r'primes.json')
 
 
 @jit(nopython=True)
@@ -54,8 +51,11 @@ def get_primes():
             prime_list.append(prime)
     return prime_list
         
-@jit(nopython=True)
-def get_prime_pair(prime_list):
+def get_prime_pair(file):
+    with open(file, "r") as f:
+        primes_file = f.readline()
+        prime_list = list(map(int,primes_file[1:-1].split(", ")))
+
     index1 = random.randint(0, len(prime_list))
     if index1 < 6:
         index2 = index1 + 6
@@ -63,20 +63,6 @@ def get_prime_pair(prime_list):
         index2 = index1 - 3
 
     return (prime_list[index1], prime_list[index2])
-
-
-if __name__ == "__main__":
-    start_time = time.time()
-    x = get_primes()
-    with open(filename, "w") as primes:
-        primes.write(str(x))
-
-    end_time = time.time()
-    print(end_time-start_time)
-    start_time = time.time()
-    z = get_prime_pair(x)
-    end_time = time.time()
-    print(end_time-start_time)
 
 
 
