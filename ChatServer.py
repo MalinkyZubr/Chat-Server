@@ -94,6 +94,7 @@ class SocketSecurity:  # see khan academy to figure out how this RSA thing works
         self.aes_cipher = AESCipher()
         self.p1, self.p2 = primality.get_prime_pair(primes_file)
         self.public_1 = (int(self.p1) * int(self.p2))
+        print(self.public_1)
         self.phi_of_key = phi_finder.phi(self.public_1) #MAJOR SLOWDOWN HERE
         print("7")
         self.public_2 = self.eligible_public_2(self.phi_of_key)
