@@ -45,7 +45,7 @@ def primality(number):
 @jit(nopython=True)
 def get_primes():
     prime_list = []
-    for num in numba.prange(10000000):
+    for num in numba.prange(10000):
         prime = primality(num)
         if prime:
             prime_list.append(prime)
@@ -63,6 +63,7 @@ def get_prime_pair(file):
         index2 = index1 - 3
 
     return (prime_list[index1], prime_list[index2])
+
 
 
 

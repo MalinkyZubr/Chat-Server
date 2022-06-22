@@ -90,9 +90,21 @@ class AESCipher(object):
 class SocketSecurity:  # see khan academy to figure out how this RSA thing works, I dont remember
     def __init__(self):
         primes_file = os.path.join(pwd, r'primes.json')
+        while True:
+            make_new_primes = str(input("[+] Would you like to generate new prime numbers?\n[y/n]:\n"))
+            if make_new_primes == "y":
+                try:
+                    ceiling = int(input("[+] What would you like the selection ceiling to be?\nEnter an integer:\n"))
+                except:
+                    continue
+                self.p1, self.p2 = primality.get_prime_pair(primality.get_primes(ceiling))
+                break
+            else:
+                self.p1, self.p2 = primality.get_prime_pair(primes_file)
+                break
+            
         self.socket_opts = SocketOpts()
         self.aes_cipher = AESCipher()
-        self.p1, self.p2 = primality.get_prime_pair(primes_file)
         self.public_1 = (int(self.p1) * int(self.p2))
         print(self.public_1)
         self.phi_of_key = phi_finder.phi(self.public_1) #MAJOR SLOWDOWN HERE
@@ -105,7 +117,6 @@ class SocketSecurity:  # see khan academy to figure out how this RSA thing works
         print("10")
 
     def get_factors(self, number):
-        print("uh oh")
         factors = []
         for i in numba.prange(1, number + 1):
             if number % i == 0:
