@@ -89,38 +89,46 @@ class AESCipher(object):
 
 
 class SocketSecurity:  # see khan academy to figure out how this RSA thing works, I dont remember
-    def __init__(self):
+    def startup(self):
         primes_file = os.path.join(pwd, r'primes.json')
-        while True:
+        primes_flag = None
+        while primes_flag is None:
             make_new_primes = str(
                 input("[+] Would you like to generate new prime numbers?\n[y/n]:\n"))
             if make_new_primes == "y":
-                try:
-                    ceiling = int(input(
-                        "[+] What would you like the selection ceiling to be?\nEnter an integer:\n"))
-                except:
-                    continue
-                self.p1, self.p2 = primality.get_prime_pair(
-                    primality.get_primes(ceiling))
-                break
+                primes_flag = True
+
+            elif make_new_primes == "n":
+                primes_flag = False
+            
             else:
-                self.p1, self.p2 = primality.get_prime_pair(primes_file)
-                break
+                print("[!] please enter y/n")
+                continue
+        
+        while primes_flag is True:
+            try:
+                ceiling = int(input(
+                    "[+] What would you like the selection ceiling to be?\nEnter an integer:\n"))
+            except:
+                continue
+            self.p1, self.p2 = primality.get_prime_pair(
+                primality.get_primes(ceiling))
+            break
+            
+        if primes_flag is False:
+            self.p1, self.p2 = primality.get_prime_pair(primes_file)
 
         self.socket_opts = SocketOpts()
         self.aes_cipher = AESCipher()
         self.public_1 = (int(self.p1) * int(self.p2))
         self.phi_of_key = phi_finder.phi(self.public_1)  # MAJOR SLOWDOWN HERE
         self.public_2 = self.eligible_public_2(self.phi_of_key)
-        print("8")
         self.private_key = (2 * self.phi_of_key + 1) / self.public_2
-        print("9")
         self.public_key = (self.public_1, self.public_2)  # send this
-        print("10")
 
     def get_factors(self, number):
         factors = []
-        for i in numba.prange(1, number + 1):
+        for i in range(2, number + 1):
             if number % i == 0:
                 factors.append(i)
 
@@ -135,21 +143,22 @@ class SocketSecurity:  # see khan academy to figure out how this RSA thing works
     def list_similarity_checker(self, list1, list2):
         for number in list1:
             if number in list2:
-                return True
+                return False #if the numbers share any factors, return false
             else:
-                return False
+                return True #if no factors are shared, return true
 
     def eligible_public_2(self, phi):
         possible_public_2s = [
-            number for number in range(25, 115)
-            if self.is_odd(number)]  # and not
-        #self.list_similarity_checker(self.get_factors(number), self.get_factors(phi))
-        # ]
-        print(possible_public_2s)
-        maximum = len(possible_public_2s) - 1
+            number for number in range(25, 200)
+            if self.is_odd(number) 
+            and self.list_similarity_checker(
+                self.get_factors(number), 
+                self.get_factors(phi)
+                )
+            ]
+        maximum = len(possible_public_2s)
         index = random.randint(0, maximum)
-        print(f"INDEX{index}")
-        print(f"LENGTH{len(possible_public_2s)}")
+        print(possible_public_2s[index])
         return possible_public_2s[index]
 
     def hasher(self, input_num):
@@ -292,6 +301,7 @@ class Server:
         self.SOCKET_OPTS = SocketOpts()
         self.SERVER_COMMANDS = SERVER_COMMANDS()
         self.SOCKET_SECURITY = SocketSecurity()
+        self.SOCKET_SECURITY.startup()
 
         self.connections_lock = Lock()
         self.message_lock = Lock()
@@ -402,6 +412,7 @@ class Server:
                 target=self.receive, args=(full_connection,))
             aes_encryption_key = self.SOCKET_SECURITY.key_exchange(
                 new_connection)
+            print(aes_encryption_key)
             full_connection[2] = aes_encryption_key
             full_connection = tuple(full_connection)
             with self.connections_lock:

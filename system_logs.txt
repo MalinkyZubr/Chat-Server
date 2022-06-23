@@ -14,3 +14,35 @@ enter 'help' for list of commands
 enter 'help' for list of commands
 2022-06-22 21:39:38,200 - System Log - INFO - [+]167.94.138.120 connected to server
 2022-06-22 21:39:39,490 - System Log - INFO - [+]167.94.138.120 disconnected
+2022-06-23 10:17:49,931 - System Log - INFO - [-]command not recognized
+2022-06-23 10:20:18,544 - System Log - INFO - [+]Starting Processes
+2022-06-23 10:20:18,545 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-06-23 10:20:18,567 - System Log - INFO - [+]Ready For Connections
+2022-06-23 10:20:18,583 - System Log - INFO - [+]Ready To Send Messages
+2022-06-23 10:20:18,630 - System Log - INFO - [+]Pinging All Connections
+2022-06-23 10:20:18,678 - System Log - INFO - [+]Admin Services Ready
+enter 'help' for list of commands
+2022-06-23 10:21:01,841 - System Log - INFO - [-]command not recognized
+2022-06-23 10:21:17,140 - System Log - INFO - [+]Starting Processes
+2022-06-23 10:21:17,141 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-06-23 10:21:17,192 - System Log - INFO - [+]Ready For Connections
+2022-06-23 10:21:17,211 - System Log - INFO - [+]Ready To Send Messages
+2022-06-23 10:21:17,258 - System Log - INFO - [+]Pinging All Connections
+2022-06-23 10:21:17,320 - System Log - INFO - [+]Admin Services Ready
+enter 'help' for list of commands
+2022-06-23 10:22:36,637 - System Log - INFO - [-]command not recognized
+2022-06-23 10:22:52,829 - System Log - INFO - [+]Starting Processes
+2022-06-23 10:22:52,830 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-06-23 10:22:52,854 - System Log - INFO - [+]Ready For Connections
+2022-06-23 10:22:52,870 - System Log - INFO - [+]Ready To Send Messages
+2022-06-23 10:22:52,917 - System Log - INFO - [+]Pinging All Connections
+2022-06-23 10:22:52,949 - System Log - INFO - [+]Admin Services Ready
+enter 'help' for list of commands
+2022-06-23 10:41:26,156 - System Log - INFO - [-]command not recognized
+2022-06-23 10:44:54,564 - System Log - INFO - [+]Starting Processes
+2022-06-23 10:44:54,565 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-06-23 10:44:54,630 - System Log - INFO - [+]Ready For Connections
+2022-06-23 10:44:54,648 - System Log - INFO - [+]Ready To Send Messages
+2022-06-23 10:44:54,693 - System Log - INFO - [+]Pinging All Connections
+2022-06-23 10:44:54,739 - System Log - INFO - [+]Admin Services Ready
+enter 'help' for list of commands
