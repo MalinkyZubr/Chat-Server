@@ -85,6 +85,9 @@ class SocketSecurity:
             connection=connection)
         response_key = ((self.session_key_unhashed ** public_2) % public_1)
         self.socket_opts.pack_and_send(response_key, connection=connection)
+        encryption_key = b64encode(response_key)
+        encryption_key = self.hasher(encryption_key)
+        return encryption_key
 
     def encrypted_send(self, connection=None, key=None, message=None):
         encrypted_message = self.aes_cipher.encrypt(message, key)
@@ -127,23 +130,25 @@ class Commands:
 
 class Client:
     def __init__(self, ip, port, displayname="Guest"):
-        self.connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.connection.connect((ip, port))
-        self.mqueue = []
-        self.name = displayname
         self.socket_opts = SocketOpts()
         self.commands = Commands()
+        self.socket_security = SocketSecurity()
+        self.connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.connection.connect((ip, port))
+        self.key = self.socket_security.key_exchange()
+        self.mqueue = []
+        self.name = displayname
         self.mqueuelock = Lock()
 
-    def send_messages(self, name):
+    def send_messages(self, name, key):
         print("[+]Ready to send messages!")
         while True:
             try:
                 message = str(input(""))
                 if message[0:2] != "&&":
                     formatted_message = f"{datetime.now().strftime('%H:%M:%S')}--{name}: {message}"
-                    self.socket_opts.pack_and_send(
-                        formatted_message, connection=self.connection)
+                    self.socket_security.encrypted_send(
+                        connection=self.connection, key=key, message=formatted_message)
                 else:
                     self.commands.execute_command(message.split(" "))
             except OSError:
@@ -152,12 +157,12 @@ class Client:
                 print("[-] Connection was Lost")
                 os._exit(1)
 
-    def receive_message(self):
+    def receive_message(self, key):
         print("[+]Ready to receive messages!")
         while True:
             try:
-                message = self.socket_opts.full_receive(
-                    connection=self.connection)
+                message = self.socket_security.receive_and_decrypt(
+                    connection=self.connection, key=key)
                 with self.mqueuelock:
                     self.mqueue.append(message)
             except ConnectionResetError:
