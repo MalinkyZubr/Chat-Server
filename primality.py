@@ -42,19 +42,26 @@ def primality(number):
     else:
         return False
 
-@jit(nopython=True)
-def get_primes():
+def get_primes(ceiling):
     prime_list = []
-    for num in numba.prange(10000):
+    for num in numba.prange(ceiling):
         prime = primality(num)
         if prime:
             prime_list.append(prime)
+    
+    with open(primes_file, "w") as pr:
+        pr.write(str(prime_list))
+        
     return prime_list
         
-def get_prime_pair(file):
-    with open(file, "r") as f:
-        primes_file = f.readline()
-        prime_list = list(map(int,primes_file[1:-1].split(", ")))
+def get_prime_pair(primes):
+    if not isinstance(primes, list):
+        with open(primes, "r") as f:
+            print(type(f))
+            primes_list = f.readline()
+            prime_list = list(map(int,primes_list[1:-1].split(", ")))
+    else:
+        prime_list = primes
 
     index1 = random.randint(0, len(prime_list))
     if index1 < 6:

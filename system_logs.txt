@@ -1,0 +1,16 @@
+2022-06-22 16:19:36,431 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+[+]Starting Processes
+2022-06-22 16:19:36,458 - System Log - INFO - [+]Ready For Connections
+2022-06-22 16:19:36,474 - System Log - INFO - [+]Ready To Send Messages
+2022-06-22 16:19:36,523 - System Log - INFO - [+]Pinging All Connections
+2022-06-22 16:19:36,593 - System Log - INFO - [+]Admin Services Ready
+enter 'help' for list of commands
+2022-06-22 16:23:32,854 - System Log - INFO - [+]Starting Processes
+2022-06-22 16:23:32,855 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-06-22 16:23:32,874 - System Log - INFO - [+]Ready For Connections
+2022-06-22 16:23:32,887 - System Log - INFO - [+]Ready To Send Messages
+2022-06-22 16:23:32,933 - System Log - INFO - [+]Pinging All Connections
+2022-06-22 16:23:32,983 - System Log - INFO - [+]Admin Services Ready
+enter 'help' for list of commands
+2022-06-22 21:39:38,200 - System Log - INFO - [+]167.94.138.120 connected to server
+2022-06-22 21:39:39,490 - System Log - INFO - [+]167.94.138.120 disconnected
