@@ -46,3 +46,17 @@ enter 'help' for list of commands
 2022-06-23 10:44:54,693 - System Log - INFO - [+]Pinging All Connections
 2022-06-23 10:44:54,739 - System Log - INFO - [+]Admin Services Ready
 enter 'help' for list of commands
+2022-06-23 12:33:26,219 - System Log - INFO - [+]Starting Processes
+2022-06-23 12:33:26,220 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-06-23 12:33:26,243 - System Log - INFO - [+]Ready For Connections
+2022-06-23 12:33:26,259 - System Log - INFO - [+]Ready To Send Messages
+2022-06-23 12:33:26,305 - System Log - INFO - [+]Pinging All Connections
+2022-06-23 12:33:26,352 - System Log - INFO - [+]Admin Services Ready
+enter 'help' for list of commands
+2022-06-30 10:57:57,427 - System Log - INFO - [+]Starting Processes
+2022-06-30 10:57:57,428 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-06-30 10:57:57,455 - System Log - INFO - [+]Ready For Connections
+2022-06-30 10:57:57,471 - System Log - INFO - [+]Ready To Send Messages
+2022-06-30 10:57:57,518 - System Log - INFO - [+]Pinging All Connections
+2022-06-30 10:57:57,566 - System Log - INFO - [+]Admin Services Ready
+enter 'help' for list of commands

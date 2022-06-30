@@ -372,6 +372,7 @@ class Server:
         # i dont know why this needs to be a tuple but the code doesnt work without it
         connection = tuple(connection)
         ip = self.SOCKET_OPTS.ip_identifier(connection[0])
+        connection, ip, hostname, username, _, key = connection
         message_count = 0
         while connection in self.connections:
             start_time = time.time()
@@ -409,6 +410,40 @@ class Server:
             # add a field available for the username
             full_connection = [new_connection, True, True]
             full_connection[1] = Thread(
+                target=self.receive, args=(full_connection,))
+            aes_encryption_key = self.SOCKET_SECURITY.key_exchange(
+                new_connection)
+            print(aes_encryption_key)
+            full_connection[2] = aes_encryption_key
+            full_connection = tuple(full_connection)
+            with self.connections_lock:
+                self.connections.append(full_connection)
+                full_connection[1].start()
+                with open(r'ban_list.txt', 'r') as ban_list:
+                    banned = ban_list.read()
+                if ip not in banned:
+                    self.SOCKET_SECURITY.encrypted_send(
+                        connection=new_connection, key=full_connection[2], message=logon_message)
+                    self.system_logger.info(f"[+]{ip} connected to server")
+                else:
+                    self.SOCKET_SECURITY(
+                        connection=new_connection, key=full_connection[2], message=rejected_message)
+                    time.sleep(0.1)
+                    self.SOCKET_OPTS.cancel_connection(
+                        (new_connection, full_connection[1]), connections=self.connections)
+                    self.system_logger.info(
+                        f"[+]{ip} was rejected from the server")
+    
+    def take_requests(self):  # add here an encryption key exchange
+        self.system_logger.info("[+]Ready For Connections")
+        logon_message = "[+] Connection Established"
+        rejected_message = "[-] Connection rejected. Banned"
+        while True:
+            connection, ip = self.sock.accept()
+            hostname = socket.gethostbyaddr(ip)
+            # add a field available for the username
+            full_connection = [connection, ip, hostname, username, True, key]
+            reception_thread = Thread(
                 target=self.receive, args=(full_connection,))
             aes_encryption_key = self.SOCKET_SECURITY.key_exchange(
                 new_connection)
