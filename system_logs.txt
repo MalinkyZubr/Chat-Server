@@ -60,3 +60,237 @@ enter 'help' for list of commands
 2022-06-30 10:57:57,518 - System Log - INFO - [+]Pinging All Connections
 2022-06-30 10:57:57,566 - System Log - INFO - [+]Admin Services Ready
 enter 'help' for list of commands
+2022-07-01 11:16:59,453 - System Log - INFO - [+]Starting Processes
+2022-07-01 11:16:59,454 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 11:16:59,473 - System Log - INFO - [+]Ready For Connections
+2022-07-01 11:16:59,488 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 11:16:59,533 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 11:16:59,598 - System Log - INFO - [+]Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 11:35:36,965 - System Log - INFO - [+]Starting Processes
+2022-07-01 11:35:36,966 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 11:35:36,985 - System Log - INFO - [+] Ready For Connections
+2022-07-01 11:35:37,001 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 11:35:37,048 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 11:35:37,095 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 11:36:53,762 - System Log - INFO - [+]Starting Processes
+2022-07-01 11:36:53,762 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 11:36:53,784 - System Log - INFO - [+] Ready For Connections
+2022-07-01 11:36:53,799 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 11:36:53,845 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 11:36:53,891 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 11:50:06,526 - System Log - INFO - [+]Starting Processes
+2022-07-01 11:50:06,526 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 11:50:06,551 - System Log - INFO - [+] Ready For Connections
+2022-07-01 11:50:06,567 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 11:50:06,613 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 11:50:06,672 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 11:51:00,109 - System Log - INFO - [+]Starting Processes
+2022-07-01 11:51:00,109 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 11:51:00,128 - System Log - INFO - [+] Ready For Connections
+2022-07-01 11:51:00,143 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 11:51:00,190 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 11:51:00,253 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 11:53:12,170 - System Log - INFO - [+]Starting Processes
+2022-07-01 11:53:12,170 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 11:53:12,190 - System Log - INFO - [+] Ready For Connections
+2022-07-01 11:53:12,205 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 11:53:12,252 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 11:53:12,315 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 11:55:04,079 - System Log - INFO - [+]Starting Processes
+2022-07-01 11:55:04,080 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 11:55:04,105 - System Log - INFO - [+] Ready For Connections
+2022-07-01 11:55:04,121 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 11:55:04,169 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 11:55:04,249 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 11:55:42,605 - System Log - INFO - [+]Starting Processes
+2022-07-01 11:55:42,605 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 11:55:42,632 - System Log - INFO - [+] Ready For Connections
+2022-07-01 11:55:42,646 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 11:55:42,719 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 11:55:42,757 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 12:17:45,788 - System Log - INFO - [+]Starting Processes
+2022-07-01 12:17:45,788 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 12:17:45,813 - System Log - INFO - [+] Ready For Connections
+2022-07-01 12:17:45,828 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 12:17:45,886 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 12:17:45,938 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 12:21:13,505 - System Log - INFO - [+]Starting Processes
+2022-07-01 12:21:13,506 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 12:21:13,531 - System Log - INFO - [+] Ready For Connections
+2022-07-01 12:21:13,547 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 12:21:13,593 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 12:21:13,641 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 12:21:43,384 - System Log - INFO - [+]Starting Processes
+2022-07-01 12:21:43,384 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 12:21:43,398 - System Log - INFO - [+] Ready For Connections
+2022-07-01 12:21:43,414 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 12:21:43,476 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 12:21:43,507 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 12:26:10,340 - System Log - INFO - [+]Starting Processes
+2022-07-01 12:26:10,341 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 12:26:10,358 - System Log - INFO - [+] Ready For Connections
+2022-07-01 12:26:10,374 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 12:26:10,423 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 12:26:10,471 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 12:27:10,397 - System Log - INFO - [+]Starting Processes
+2022-07-01 12:27:10,398 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 12:27:10,424 - System Log - INFO - [+] Ready For Connections
+2022-07-01 12:27:10,440 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 12:27:10,487 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 12:27:10,535 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 12:31:31,245 - System Log - INFO - [+]Starting Processes
+2022-07-01 12:31:31,246 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 12:31:31,268 - System Log - INFO - [+] Ready For Connections
+2022-07-01 12:31:31,283 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 12:31:31,331 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 12:31:31,363 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 12:32:49,695 - System Log - INFO - [+]Starting Processes
+2022-07-01 12:32:49,696 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 12:32:49,721 - System Log - INFO - [+] Ready For Connections
+2022-07-01 12:32:49,737 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 12:32:49,784 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 12:32:49,849 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 12:36:45,208 - System Log - INFO - [+]Starting Processes
+2022-07-01 12:36:45,209 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 12:36:45,222 - System Log - INFO - [+] Ready For Connections
+2022-07-01 12:36:45,237 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 12:36:45,285 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 12:36:45,349 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 12:45:07,728 - System Log - INFO - [+]Starting Processes
+2022-07-01 12:45:07,728 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 12:45:07,740 - System Log - INFO - [+] Ready For Connections
+2022-07-01 12:45:07,755 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 12:45:07,803 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 12:45:07,866 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 12:50:43,633 - System Log - INFO - [+]Starting Processes
+2022-07-01 12:50:43,633 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 12:50:43,659 - System Log - INFO - [+] Ready For Connections
+2022-07-01 12:50:43,673 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 12:50:43,721 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 12:50:43,767 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 12:52:40,016 - System Log - INFO - [-] command not recognized
+2022-07-01 12:52:56,104 - System Log - INFO - [+]Starting Processes
+2022-07-01 12:52:56,105 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 12:52:56,130 - System Log - INFO - [+] Ready For Connections
+2022-07-01 12:52:56,146 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 12:52:56,239 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 12:52:56,270 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 13:09:06,902 - System Log - INFO - [+]Starting Processes
+2022-07-01 13:09:06,902 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 13:09:06,917 - System Log - INFO - [+] Ready For Connections
+2022-07-01 13:09:06,933 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 13:09:06,978 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 13:09:07,024 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 13:10:14,260 - System Log - INFO - [+]Starting Processes
+2022-07-01 13:10:14,260 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 13:10:14,283 - System Log - INFO - [+] Ready For Connections
+2022-07-01 13:10:14,300 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 13:10:14,347 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 13:10:14,426 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 13:21:07,576 - System Log - INFO - [-] command not recognized
+2022-07-01 13:21:18,221 - System Log - INFO - [+]Starting Processes
+2022-07-01 13:21:18,221 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 13:21:18,235 - System Log - INFO - [+] Ready For Connections
+2022-07-01 13:21:18,251 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 13:21:18,297 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 13:21:18,343 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 13:28:39,758 - System Log - INFO - [+]Starting Processes
+2022-07-01 13:28:39,759 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 13:28:39,777 - System Log - INFO - [+] Ready For Connections
+2022-07-01 13:28:39,793 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 13:28:39,840 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 13:28:39,888 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 13:29:48,793 - System Log - INFO - [+]Starting Processes
+2022-07-01 13:29:48,794 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 13:29:48,817 - System Log - INFO - [+] Ready For Connections
+2022-07-01 13:29:48,833 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 13:29:48,879 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 13:29:48,927 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 13:33:34,206 - System Log - INFO - [+]Starting Processes
+2022-07-01 13:33:34,206 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 13:33:34,228 - System Log - INFO - [+] Ready For Connections
+2022-07-01 13:33:34,242 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 13:33:34,290 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 13:33:34,322 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 13:50:41,209 - System Log - INFO - [+]Starting Processes
+2022-07-01 13:50:41,210 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 13:50:41,234 - System Log - INFO - [+] Ready For Connections
+2022-07-01 13:50:41,250 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 13:50:41,296 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 13:50:41,342 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 13:53:53,558 - System Log - INFO - [+]Starting Processes
+2022-07-01 13:53:53,559 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 13:53:53,583 - System Log - INFO - [+] Ready For Connections
+2022-07-01 13:53:53,597 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 13:53:53,645 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 13:53:53,693 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 13:55:28,388 - System Log - INFO - [+]Starting Processes
+2022-07-01 13:55:28,388 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 13:55:28,404 - System Log - INFO - [+] Ready For Connections
+2022-07-01 13:55:28,420 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 13:55:28,467 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 13:55:28,513 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 13:56:20,322 - System Log - INFO - [+]Starting Processes
+2022-07-01 13:56:20,322 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 13:56:20,345 - System Log - INFO - [+] Ready For Connections
+2022-07-01 13:56:20,359 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 13:56:20,406 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 13:56:20,451 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 13:57:53,531 - System Log - INFO - [+]Starting Processes
+2022-07-01 13:57:53,531 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 13:57:53,551 - System Log - INFO - [+] Ready For Connections
+2022-07-01 13:57:53,566 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 13:57:53,613 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 13:57:53,689 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 14:07:21,863 - System Log - INFO - [+]Starting Processes
+2022-07-01 14:07:21,864 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 14:07:21,882 - System Log - INFO - [+] Ready For Connections
+2022-07-01 14:07:21,897 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 14:07:21,944 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 14:07:21,992 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 14:07:29,327 - System Log - INFO - [-] command not recognized
+2022-07-01 14:07:54,043 - System Log - INFO - [+]Starting Processes
+2022-07-01 14:07:54,043 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 14:07:54,061 - System Log - INFO - [+] Ready For Connections
+2022-07-01 14:07:54,077 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 14:07:54,123 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 14:07:54,169 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands
+2022-07-01 14:08:40,751 - System Log - INFO - [+]Starting Processes
+2022-07-01 14:08:40,751 - System Log - INFO - [+]Server Online at IP: 0.0.0.0 PORT: 2222
+2022-07-01 14:08:40,773 - System Log - INFO - [+] Ready For Connections
+2022-07-01 14:08:40,789 - System Log - INFO - [+]Ready To Send Messages
+2022-07-01 14:08:40,836 - System Log - INFO - [+]Pinging All Connections
+2022-07-01 14:08:40,899 - System Log - INFO - [+] Admin Services Ready
+enter 'help' for list of commands

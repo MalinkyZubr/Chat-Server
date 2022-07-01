@@ -9,11 +9,8 @@ def is_coprime(x, y):
 
 @jit(nopython=True)
 def phi(x):
-    n = [y for y in range(1, x/2) if is_coprime(x, y)]
-    return len(n)
-
-start = time.time()
-print(gcd(41687528601119, 485345))
-end = time.time()
-time = end-start
-print(time*1306627313963)
+    if x == 1:
+        return 1
+    else:
+        n = [y for y in range(1, x) if is_coprime(x, y)]
+        return len(n)

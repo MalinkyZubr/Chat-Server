@@ -53,6 +53,10 @@ class SocketOpts:
         connection[1].join()
         return f"[+]{ip} disconnected"
 
+    def user_exchange(self, connection=None, key=None):
+        username = self.SOCKET_SECURITY.receive_and_decrypt(connection=connection,key=key)
+        return username
+
 
 class AESCipher(object):
     def __init__(self):
@@ -89,7 +93,7 @@ class AESCipher(object):
 
 
 class SocketSecurity:  # see khan academy to figure out how this RSA thing works, I dont remember
-    def startup(self):
+    def __init__(self):
         primes_file = os.path.join(pwd, r'primes.json')
         primes_flag = None
         while primes_flag is None:
@@ -149,7 +153,7 @@ class SocketSecurity:  # see khan academy to figure out how this RSA thing works
 
     def eligible_public_2(self, phi):
         possible_public_2s = [
-            number for number in range(25, 200)
+            number for number in range(25, 50)
             if self.is_odd(number) 
             and self.list_similarity_checker(
                 self.get_factors(number), 
@@ -162,21 +166,28 @@ class SocketSecurity:  # see khan academy to figure out how this RSA thing works
         return possible_public_2s[index]
 
     def hasher(self, input_num):
-        hash_iteration = hashlib.sha512(input_num).hexdigest().encode()
-        for x in range(int(b64decode(input_num)[:4])):
+        hash_iteration = hashlib.sha512(input_num.encode()).hexdigest()
+        for x in range(int(float(input_num[:4]))):
             hash_iteration = hashlib.sha512(
-                hash_iteration).hexdigest().encode()
-        return hash_iteration.decode('utf-8')
+                hash_iteration.encode()).hexdigest()
+        return hash_iteration
 
     def key_exchange(self, connection):
-        self.socket_opts.pack_and_send(connection, self.public_key)
+        print(type(self.public_key))
+        for key in self.public_key:
+            self.socket_opts.pack_and_send(connection, str(key))
+        print("KEY SENT")
         encryption_key_encrypted = self.socket_opts.receive_and_unpack(
             connection)
-        encryption_key = b64encode
-        (
-            ((encryption_key_encrypted ** self.private_key) % self.public_1)
-        )
-        hashed_encryption_key = self.hasher(encryption_key)
+        print("KEY RECEIVED")
+        print(encryption_key_encrypted)
+        print(self.private_key)
+        print(self.public_1)
+        print(encryption_key_encrypted ** self.private_key)
+        encryption_key = (encryption_key_encrypted ** self.private_key) % self.public_1
+        print(encryption_key)
+        hashed_encryption_key = self.hasher(str(encryption_key))
+        print(hashed_encryption_key)
         return hashed_encryption_key
 
     def encrypted_send(self, connection=None, key=None, message=None):
@@ -193,24 +204,16 @@ class SERVER_COMMANDS:
     def __init__(self):
         self.command_instructions = {
             "connections": "see list of active connections",
-            "kick (ip_address, reason)": "force disconnect of connection at selected IP",
-            "ban (ip_address, reason)": "adds ip address to ban_list file and prevents future logon",
+            "kick (ip_address)": "force disconnect of connection at selected IP",
+            "ban (ip_address)": "adds ip address to ban_list file and prevents future logon",
             "unban (ip)": "Unbans a given IP",
             "servermessage": "Send a server-wide message",
             "shutdown": "Close the server and disconnect all clients"}
         self.SOCKET_OPTS = SocketOpts()
-        self.SOCKET_SECURITY = SocketSecurity()
         self.ban_file = filename = os.path.join(pwd, r'ban_list.txt')
 
-    def command_input(self, inputs):
-        request = inputs.split(sep=" ")
-        request = list(map(lambda y: y.lower(), request))
-        command = request[0]
-        argument_1 = request[1]
-        return command, argument_1
-
     def kick_user(self, ip_requested=None, connections=None, reason=None, key=None):
-        for connection, thread, key in connections:
+        for connection, ip, hostname, key, thread, username in connections:
             #ip = self.SOCKET_OPTS.ip_identifier(connection)
             if ip_requested in connection:
                 self.SOCKET_SECURITY.encrypted_send(
@@ -222,7 +225,7 @@ class SERVER_COMMANDS:
                 return f"[-]User with ip {ip_requested} not found"
 
     def ban_user(self, ip_requested=None, connections=None, reason=None, key=None):
-        for connection, thread, key in connections:
+        for connection, ip, hostname, key, thread, username in connections:
             #ip = self.ip_identifier(connection)
             if ip_requested in ip:
                 self.SOCKET_SECURITY.encrypted_send(
@@ -255,7 +258,7 @@ class SERVER_COMMANDS:
         print("###CONNECTIONS LIST###")
         connection_list = str()
         if connections:
-            for connection, thread, key in connections:
+            for connection, ip, hostname, key, thread, username in connections:
                 ip = self.SOCKET_OPTS.ip_identifier(connection)
                 connection += f"\t{ip} Online\n"
             return connection
@@ -267,13 +270,13 @@ class SERVER_COMMANDS:
 
     def shutdown(self, connections=None):
         while connections:
-            for connection, thread, key in self.connections:
+            for connection, ip, hostname, key, thread, username in self.connections:
                 self.SOCKET_SECURITY.encrypted_send(
                     connection=connection, key=key, message="&&SERVER SHUTDOWN INITIATED&&")
                 self.SOCKET_OPTS.cancel_connection(
                     (connection, thread), connections)
 
-        return ("[+]All connection successfully killed, server shutting down")
+        return ("[+] All connection successfully killed, server shutting down")
         os._exit(1)  # make this after function call
 
     def display_commands(self, commandlist):
@@ -301,7 +304,8 @@ class Server:
         self.SOCKET_OPTS = SocketOpts()
         self.SERVER_COMMANDS = SERVER_COMMANDS()
         self.SOCKET_SECURITY = SocketSecurity()
-        self.SOCKET_SECURITY.startup()
+        self.SERVER_COMMANDS.SOCKET_SECURITY = self.SOCKET_SECURITY
+        self.SOCKET_OPTS.SOCKET_SECURITY = self.SOCKET_SECURITY
 
         self.connections_lock = Lock()
         self.message_lock = Lock()
@@ -335,7 +339,7 @@ class Server:
             # self.system_logger.info(self.connections)
             time.sleep(2)
             with self.connections_lock:
-                for connection, thread, key in self.connections:
+                for connection, ip, hostname, key, thread, username in self.connections:
                     if not thread.is_alive():
                         self.system_logger.info(self.SOCKET_OPTS.cancel_connection(
                             (connection, thread), connections=self.connections))
@@ -352,7 +356,7 @@ class Server:
         while True:
             with self.connections_lock, self.message_lock:
                 if self.message_queue and self.connections:
-                    for connection, thread, key in self.connections:
+                    for connection, ip, hostname, key, thread, username in self.connections:
                         try:
                             connection.send(self.message_queue[0])
                         except (RuntimeError,
@@ -368,10 +372,9 @@ class Server:
                     except IndexError:
                         continue
 
-    def receive(self, connection):
+    def receive(self, client):
         # i dont know why this needs to be a tuple but the code doesnt work without it
-        connection = tuple(connection)
-        ip = self.SOCKET_OPTS.ip_identifier(connection[0])
+        client = tuple(client)
         connection, ip, hostname, username, _, key = connection
         message_count = 0
         while connection in self.connections:
@@ -380,7 +383,7 @@ class Server:
             while time.time() < end_time and message_count <= 4:
                 try:
                     message = self.SOCKET_SECURITY.receive_and_decrypt(
-                        connection=connection[0], key=connection[2])
+                        connection=connection, key=key)
                 except (ConnectionAbortedError, ConnectionResetError):
                     sys.exit(1)
                 if message:
@@ -391,7 +394,7 @@ class Server:
                     self.system_logger.info(message_count)
             if message_count >= 4:
                 self.SOCKET_SECURITY.encrypted_send(
-                    connection=connection[0], key=connection[2], message="[-]You were kicked for spamming")
+                    connection=connection, key=key, message="[-]You were kicked for spamming")
                 with self.message_lock:
                     self.message_queue.append(
                         self.SERVER_COMMANDS.server_message("Please no spamming :)"))
@@ -399,83 +402,57 @@ class Server:
             else:
                 message_count = 0
                 continue
-
-    def take_requests(self):  # add here an encryption key exchange
-        self.system_logger.info("[+]Ready For Connections")
-        logon_message = "[+] Connection Established"
-        rejected_message = "[-] Connection rejected. Banned"
-        while True:
-            new_connection = self.sock.accept()[0]
-            ip = self.SOCKET_OPTS.ip_identifier(new_connection)
-            # add a field available for the username
-            full_connection = [new_connection, True, True]
-            full_connection[1] = Thread(
-                target=self.receive, args=(full_connection,))
-            aes_encryption_key = self.SOCKET_SECURITY.key_exchange(
-                new_connection)
-            print(aes_encryption_key)
-            full_connection[2] = aes_encryption_key
-            full_connection = tuple(full_connection)
-            with self.connections_lock:
-                self.connections.append(full_connection)
-                full_connection[1].start()
-                with open(r'ban_list.txt', 'r') as ban_list:
-                    banned = ban_list.read()
-                if ip not in banned:
-                    self.SOCKET_SECURITY.encrypted_send(
-                        connection=new_connection, key=full_connection[2], message=logon_message)
-                    self.system_logger.info(f"[+]{ip} connected to server")
-                else:
-                    self.SOCKET_SECURITY(
-                        connection=new_connection, key=full_connection[2], message=rejected_message)
-                    time.sleep(0.1)
-                    self.SOCKET_OPTS.cancel_connection(
-                        (new_connection, full_connection[1]), connections=self.connections)
-                    self.system_logger.info(
-                        f"[+]{ip} was rejected from the server")
     
     def take_requests(self):  # add here an encryption key exchange
-        self.system_logger.info("[+]Ready For Connections")
+        self.system_logger.info("[+] Ready For Connections")
         logon_message = "[+] Connection Established"
         rejected_message = "[-] Connection rejected. Banned"
         while True:
-            connection, ip = self.sock.accept()
+            connection, (ip, port) = self.sock.accept()
             hostname = socket.gethostbyaddr(ip)
-            # add a field available for the username
-            full_connection = [connection, ip, hostname, username, True, key]
-            reception_thread = Thread(
-                target=self.receive, args=(full_connection,))
-            aes_encryption_key = self.SOCKET_SECURITY.key_exchange(
-                new_connection)
-            print(aes_encryption_key)
-            full_connection[2] = aes_encryption_key
-            full_connection = tuple(full_connection)
-            with self.connections_lock:
-                self.connections.append(full_connection)
-                full_connection[1].start()
-                with open(r'ban_list.txt', 'r') as ban_list:
-                    banned = ban_list.read()
-                if ip not in banned:
+            key = self.SOCKET_SECURITY.key_exchange(
+                connection)
+            username = self.SOCKET_OPTS.user_exchange(connection=connection, key=key)
+
+            with open(r'ban_list.txt', 'r') as ban_list:
+                banned = ban_list.read()
+                if ip and hostname not in banned:
                     self.SOCKET_SECURITY.encrypted_send(
-                        connection=new_connection, key=full_connection[2], message=logon_message)
+                        connection=new_connection, key=key, message=logon_message)
                     self.system_logger.info(f"[+]{ip} connected to server")
                 else:
                     self.SOCKET_SECURITY(
-                        connection=new_connection, key=full_connection[2], message=rejected_message)
+                        connection=new_connection, key=key, message=rejected_message)
                     time.sleep(0.1)
                     self.SOCKET_OPTS.cancel_connection(
                         (new_connection, full_connection[1]), connections=self.connections)
                     self.system_logger.info(
                         f"[+]{ip} was rejected from the server")
+
+            client = [connection, ip, hostname, key, True, username]
+            reception_thread = Thread(
+                target=self.receive, args=(client,))
+            client[4] = reception_thread
+            print(aes_encryption_key)
+            
+            full_connection = tuple(full_connection)
+            with self.connections_lock:
+                self.connections.append(full_connection)
+                reception_thread.start()
 
     def command_interface(self):
         self.system_logger.info(
-            "[+]Admin Services Ready\nenter 'help' for list of commands")
+            "[+] Admin Services Ready\nenter 'help' for list of commands")
         command_list = self.SERVER_COMMANDS.command_instructions
         while True:
-            command_input = str(input())
-            command, argument = self.SERVER_COMMANDS.command_input(
-                command_input)
+            command_input = str(input()).split(" ")
+            command_input = list(map(lambda y: y.lower(), command_input))
+
+            try:
+                command = command_input[0]
+            except IndexError:
+                continue
+
             if command == "help":
                 print(self.SERVER_COMMANDS.display_commands(command_list))
             elif command == "connections":
@@ -485,19 +462,33 @@ class Server:
             elif command == "kick":
                 with self.connections_lock:
                     reason = str(input("Please enter reason to kick:\n"))
-                    self.system_logger.info(self.SERVER_COMMANDS.kick_user(ip_requested=argument,
+                    try:
+                        self.system_logger.info(self.SERVER_COMMANDS.kick_user(ip_requested=command[1],
                                                                            connections=self.connections, reason=reason))
+                    except IndexError:
+                        print("[-] Please enter an IP")
+                        continue
             elif command == "ban":
                 with self.connections_lock:
-                    reason = str(input("Please enter reason to kick:\n"))
-                    self.system_logger.info(self.SERVER_COMMANDS.ban_user(ip_requested=argument,
+                    reason = str(input("Please enter reason to ban:\n"))
+                    try:
+                        self.system_logger.info(self.SERVER_COMMANDS.ban_user(ip_requested=command[1],
                                                                           connections=self.connections, reason=reason))
+                    except IndexError:
+                        print("[-] Please enter an IP")
+                        continue
+
             elif command == "unban":
-                self.system_logger.info(
-                    self.SERVER_COMMANDS.unban_user(ip_requested=argument))
+                try:
+                    self.system_logger.info(
+                        self.SERVER_COMMANDS.unban_user(ip_requested=command[1]))
+                except IndexError:
+                        print("[-] Please enter an IP")
+                        continue
+
             elif command == "servermessage":
                 message_input = str(
-                    input('[+]Please enter your server-wide message here: \n'))
+                    input('[+] Please enter your server-wide message here: \n'))
                 with self.message_lock:
                     self.message_queue.append(
                         self.SERVER_COMMANDS.server_message(message_input=message_input))
@@ -511,7 +502,7 @@ class Server:
                 else:
                     self.system_logger.info("[+] Shutdown Cancelled")
             else:
-                self.system_logger.info("[-]command not recognized")
+                self.system_logger.info("[-] command not recognized")
 
     def main(self):
         self.system_logger.info(

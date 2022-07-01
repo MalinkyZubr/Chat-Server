@@ -63,11 +63,10 @@ def get_prime_pair(primes):
     else:
         prime_list = primes
 
-    index1 = random.randint(0, len(prime_list))
-    if index1 < 6:
-        index2 = index1 + 6
-    else:
-        index2 = index1 - 3
+    index1 = random.randint(0, len(prime_list) - 1)
+    index2 = random.randint(0, len(prime_list) - 1)
+    while index1 == index2:
+        index2 = random.randint(0, len(prime_list))
 
     return (prime_list[index1], prime_list[index2])
 
